@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Resizer</title>
+<head>
+    <style>
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+      }
+
+      #img-container {
+        margin: 20px 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      input[type="text"] {
+        margin: 20px 0;
+        padding: 10px;
+        font-size: 18px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: lightblue;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Image Resizer</h1>
+      <input type="text" id="img-url" placeholder="Enter image URL">
+      <input type="text" id="width" placeholder="Width">
+      <input type="text" id="height" placeholder="Height">
+      <button id="resize-button">Resize</button>
+      <button id="download-button" style="margin-top: 20px">Download</button>
+      <div id="img-container">
+        <img id="img">
+      </div>
+    </div>
+
+    <script>
+      const imgUrlInput = document.getElementById("img-url");
+      const widthInput = document.getElementById("width");
+      const heightInput = document.getElementById("height");
+      const resizeButton = document.getElementById("resize-button");
+      const downloadButton = document.getElementById("download-button");
+      const img = document.getElementById("img");
+
+      resizeButton.addEventListener("click", () => {
+        img.src = imgUrlInput.value;
+        img.width = widthInput.value;
+        img.height = heightInput.value;
+      });
+
+      downloadButton.addEventListener("click", () => {
+        const a = document.createElement("a");
+        a.href = img.src;
+        a.download = "resized-image.jpg";
+        a.click();
+      });
+    </script>
+  </body>
+</html>
