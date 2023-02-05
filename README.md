@@ -13,21 +13,3 @@ See it Live [HERE](https://maligaurav947.github.io/working-with-ChatGPT/)
 ## Version
 
 V.0.1
-
-## Clone this Repo
-
-To deploy this project run
-
-```bash
-  git clone https://github.com/maligaurav947/working-with-ChatGPT.git
-```
-
-## Installation
-
-Install my-project with npm
-
-```bash
-  npm install
-  cd my-project
-  npm start
-```
