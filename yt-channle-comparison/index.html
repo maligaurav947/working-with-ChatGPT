@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      
+      input, button {
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      
+      th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+        font-size: 16px;
+      }
+      
+      th {
+        background-color: #f2f2f2;
+      }
+      
+      h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+      @media only screen and (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr {
+    border: 1px solid #ccc;
+  }
+  
+  td {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    padding-left: 50%;
+  }
+  
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+  
+  td:nth-of-type(1):before {
+    content: "Channel";
+  }
+  td:nth-of-type(2):before {
+    content: "Subscribers";
+  }
+  td:nth-of-type(3):before {
+    content: "Views";
+  }
+  td:nth-of-type(4):before {
+    content: "Videos";
+  }
+}
+
+
+    </style>
+  </head>
+  <body>
+    <h2>YouTube Channel Comparison</h2>
+    <input type="text" id="channelNameInput" placeholder="Enter Channel Name">
+    <button onclick="getData()">Get Data</button>
+    <br><br>
+    <table id="channelTable" style="width:100%">
+      <tr>
+        <th>Channel Name</th>
+        <th>Subscribers</th>
+        <th>Views</th>
+        <th>Videos</th>
+      </tr>
+    </table>
+    <script>
+      function getData() {
+        // Replace YOUR_API_KEY with your actual API key
+        const API_KEY = "AIzaSyBgrMK5Wje2p6nAOB1z4WMqMNGK9oq5obI";
+
+        // Get the channel name from the input field
+        const channelNameInput = document.getElementById("channelNameInput").value;
+
+        // The URL to search for a channel by its name
+        const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${channelNameInput}&key=${API_KEY}`;
+
+        // Fetch the channel ID from the search result
+        fetch(searchUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            const channelId = data.items[0].id.channelId;
+
+            // The URL to retrieve the channel data
+            const channelUrl = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${API_KEY}`;
+
+            // Fetch the data from the API
+            fetch(channelUrl)
+              .then((response) => response.json())
+              .then((data) => {
+                const channelData = data.items[0].statistics;
+                // Populate the table with the data
+                const channelTable = document.getElementById("channelTable");
+                const row = channelTable.insertRow();
+                row.insertCell().innerHTML = channelNameInput;
+                row.insertCell().innerHTML = channelData.subscriberCount;
+                row.insertCell().innerHTML = channelData.viewCount;
+                row.insertCell().innerHTML = channelData.videoCount;
+              })
+              .catch((error) => console.error(error));
+          })
+          .catch((error) => console.error(error));
+      }
+    </script>
+  </body>
+</html>
