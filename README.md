@@ -1,6 +1,29 @@
 # working-with-ChatGPT
 
+ChatGPT is a chatbot launched by OpenAI in November 2022. It is built on top of OpenAI's GPT-3 family of large language models and is fine-tuned with both supervised and reinforcement learning techniques
 
-Tell me about your self chatgpt
+## Demo
 
-- I am an AI language model created by OpenAI. I have been trained on a large dataset of text from the internet and can generate text in response to prompts given to me. My training allows me to answer questions, generate creative writing, translate languages, summarize long text, and much more. I do not have emotions, personal experiences, or a physical form. I am only capable of generating text based on the data I was trained on.
+See it Live [HERE](https://maligaurav947.github.io/working-with-ChatGPT/) 
+
+## Version
+
+V.0.1
+
+## Clone this Repo
+
+To deploy this project run
+
+```bash
+  git clone https://github.com/maligaurav947/working-with-ChatGPT.git
+```
+
+## Installation
+
+Install my-project with npm
+
+```bash
+  npm install
+  cd my-project
+  npm start
+```
